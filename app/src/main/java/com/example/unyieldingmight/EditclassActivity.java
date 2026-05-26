@@ -10,28 +10,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
 import android.app.TimePickerDialog;
 
-public class CreateclassActivity extends AppCompatActivity {
-    Button activity_createclass_btn_datepicker = findViewById(R.id.activity_createclass_btn_datepicker);
-    TextView activity_createclass_tv_selecteddate = findViewById(R.id.activity_createclass_tv_selecteddate);
-    Button activity_createclass_btn_starttime = findViewById(R.id.activity_createclass_btn_starttime), activity_createclass_btn_endtime = findViewById(R.id.activity_createclass_btn_endtime);
-    TextView activity_createclass_tv_startTtime = findViewById(R.id.activity_createclass_tv_startTtime), activity_createclass_tv_endtime = findViewById(R.id.activity_createclass_tv_endtime);
+
+public class EditclassActivity extends AppCompatActivity {
+    Button activity_editclass_btn_datepicker = findViewById(R.id.activity_editclass_btn_datepicker);
+    TextView activity_editclass_tv_selecteddate = findViewById(R.id.activity_editclass_tv_selecteddate);
+    Button activity_editclass_btn_starttime = findViewById(R.id.activity_editclass_btn_starttime), activity_editclass_btn_endtime = findViewById(R.id.activity_editclass_btn_endtime);
+    TextView activity_editclass_tv_startTtime = findViewById(R.id.activity_editclass_tv_startTtime), activity_editclass_tv_endtime = findViewById(R.id.activity_editclass_tv_endtime);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_createclass);
+        setContentView(R.layout.activity_editclass);
 
-        activity_createclass_btn_datepicker.setOnClickListener(v -> {
+        activity_editclass_btn_datepicker.setOnClickListener(v -> {
             Calendar cal = Calendar.getInstance();
             int year  = cal.get(Calendar.YEAR);
             int month = cal.get(Calendar.MONTH);
             int day   = cal.get(Calendar.DAY_OF_MONTH);
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(
-                    CreateclassActivity.this,
+                    EditclassActivity.this,
                     (view, selectedYear, selectedMonth, selectedDay) -> {
                         String date = selectedDay + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                        activity_createclass_tv_selecteddate.setText("Selected Date: " + date);
+                        activity_editclass_tv_selecteddate.setText("Selected Date: " + date);
                     },
                     year, month, day
             );
@@ -44,12 +45,12 @@ public class CreateclassActivity extends AppCompatActivity {
 
 
 
-        activity_createclass_btn_starttime.setOnClickListener(v -> {
+        activity_editclass_btn_starttime.setOnClickListener(v -> {
             TimePickerDialog timePicker = new TimePickerDialog(
-                    CreateclassActivity.this,
+                    EditclassActivity.this,
                     (view, hourOfDay, minute) -> {
                         String time = formatTime(hourOfDay, minute);
-                        activity_createclass_tv_startTtime.setText("Start Time: " + time);
+                        activity_editclass_tv_startTtime.setText("Start Time: " + time);
                     },
                     currentHour, currentMinute, false
             );
@@ -57,12 +58,12 @@ public class CreateclassActivity extends AppCompatActivity {
             timePicker.show();
         });
 
-        activity_createclass_btn_endtime.setOnClickListener(v -> {
+        activity_editclass_btn_endtime.setOnClickListener(v -> {
             TimePickerDialog timePicker = new TimePickerDialog(
-                    CreateclassActivity.this,
+                    EditclassActivity.this,
                     (view, hourOfDay, minute) -> {
                         String time = formatTime(hourOfDay, minute);
-                        activity_createclass_tv_endtime.setText("End Time: " + time);
+                        activity_editclass_tv_endtime.setText("End Time: " + time);
                     },
                     currentHour, currentMinute, false
             );
@@ -70,7 +71,7 @@ public class CreateclassActivity extends AppCompatActivity {
             timePicker.show();
         });
 
-        Spinner spinner = findViewById(R.id.activity_createclass_spinner_level);
+        Spinner spinner = findViewById(R.id.activity_editclass_spinner_level);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.level_array,
